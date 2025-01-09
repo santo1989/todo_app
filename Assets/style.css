@@ -1,0 +1,13 @@
+.task-card {
+    cursor: grab;
+    background-color: #f8f9fa;
+    border: 1px solid #ccc;
+}
+
+.task-card:hover {
+    background-color: #e2e6ea;
+}
+
+.card-body {
+    min-height: 200px;
+}
