@@ -1,0 +1,15 @@
+.git
+.gitignore
+.qodo
+node_modules
+vendor
+*.db
+*.log
+*.exe
+README.md
+Dockerfile
+.dockerignore
+add_task.php
+db.php
+index.php
+update_task.php

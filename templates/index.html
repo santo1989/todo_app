@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daily Notes Board</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/style.css" />
+  </head>
+  <body>
+    <div class="bg-orb orb-left"></div>
+    <div class="bg-orb orb-right"></div>
+
+    <main class="app">
+      <section class="auth-shell" id="auth-shell">
+        <div class="auth-card" id="auth-card">
+          <h2>Sign In</h2>
+          <p class="auth-note">Use your account to keep notes private per user.</p>
+          <form id="auth-form" class="auth-form">
+            <input id="auth-username" type="text" placeholder="Username" minlength="3" maxlength="40" required />
+            <input id="auth-password" type="password" placeholder="Password" minlength="8" required />
+            <div class="auth-actions">
+              <button type="submit" data-action="login">Login</button>
+              <button type="button" data-action="register" id="register-btn">Register</button>
+            </div>
+          </form>
+        </div>
+        <div class="auth-user hidden" id="auth-user">
+          <p>Signed in as <strong id="username-chip"></strong></p>
+          <button type="button" id="logout-btn">Logout</button>
+        </div>
+      </section>
+
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Daily Workflow</p>
+          <h1>Daily Notes Drag Board</h1>
+        </div>
+        <form id="create-form" class="create-form">
+          <input
+            id="note-title"
+            name="title"
+            type="text"
+            placeholder="What needs to happen?"
+            maxlength="120"
+            required />
+          <input
+            id="note-content"
+            name="content"
+            type="text"
+            placeholder="Details for this note..."
+            maxlength="260" />
+          <button type="submit">Add Note</button>
+        </form>
+      </header>
+
+      <section class="controls">
+        <label for="note-date">Date</label>
+        <input id="note-date" type="date" />
+        <button id="reload-btn" type="button">Refresh</button>
+        <p class="feedback" id="feedback"></p>
+      </section>
+
+      <section class="board" id="board">
+        <article class="lane" data-status="todo">
+          <header>
+            <h2>To Do</h2>
+            <span class="counter" id="count-todo">0</span>
+          </header>
+          <div class="lane-body" data-status="todo"></div>
+        </article>
+
+        <article class="lane" data-status="in-progress">
+          <header>
+            <h2>In Progress</h2>
+            <span class="counter" id="count-in-progress">0</span>
+          </header>
+          <div class="lane-body" data-status="in-progress"></div>
+        </article>
+
+        <article class="lane" data-status="done">
+          <header>
+            <h2>Done</h2>
+            <span class="counter" id="count-done">0</span>
+          </header>
+          <div class="lane-body" data-status="done"></div>
+        </article>
+      </section>
+    </main>
+
+    <template id="note-template">
+      <article class="note" draggable="true">
+        <h3 class="title"></h3>
+        <p class="content"></p>
+        <div class="meta">
+          <button type="button" class="edit-btn">Edit</button>
+          <button type="button" class="delete-btn">Delete</button>
+        </div>
+      </article>
+    </template>
+
+    <script src="/assets/script.js" defer></script>
+  </body>
+</html>

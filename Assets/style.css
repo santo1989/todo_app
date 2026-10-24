@@ -1,13 +1,331 @@
-.task-card {
+:root {
+    --bg: #f3efe7;
+    --ink: #101820;
+    --accent: #0f766e;
+    --accent-2: #ca8a04;
+    --surface: #fffdf8;
+    --border: #d6cfbf;
+    --muted: #5c665f;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Space Grotesk", sans-serif;
+    color: var(--ink);
+    background: radial-gradient(circle at 15% 25%, #fff2c8 0%, transparent 35%),
+        radial-gradient(circle at 85% 10%, #c6f2ed 0%, transparent 30%),
+        var(--bg);
+    overflow-x: hidden;
+}
+
+.bg-orb {
+    position: fixed;
+    width: 28rem;
+    height: 28rem;
+    border-radius: 50%;
+    opacity: 0.25;
+    filter: blur(90px);
+    z-index: -1;
+}
+
+.orb-left {
+    left: -10rem;
+    top: -10rem;
+    background: #14b8a6;
+}
+
+.orb-right {
+    right: -7rem;
+    bottom: -10rem;
+    background: #f59e0b;
+}
+
+.app {
+    width: min(1200px, 94vw);
+    margin: 2.25rem auto;
+}
+
+.hidden {
+    display: none;
+}
+
+.auth-shell {
+    margin-bottom: 1rem;
+}
+
+.auth-card,
+.auth-user {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: color-mix(in oklab, var(--surface) 94%, #ffffff 6%);
+    padding: 0.9rem;
+    box-shadow: 0 8px 22px rgba(16, 24, 32, 0.08);
+}
+
+.auth-card h2 {
+    margin: 0;
+    font-size: 1.05rem;
+}
+
+.auth-note {
+    margin: 0.35rem 0 0.7rem;
+    color: var(--muted);
+    font-size: 0.88rem;
+}
+
+.auth-form {
+    display: grid;
+    gap: 0.6rem;
+}
+
+.auth-form input,
+.auth-actions button,
+.auth-user button {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.62rem 0.78rem;
+    font-family: inherit;
+}
+
+.auth-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.auth-actions button,
+.auth-user button {
+    border: none;
+    background: linear-gradient(110deg, var(--accent), #14b8a6);
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.auth-user {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.auth-user p {
+    margin: 0;
+    font-size: 0.93rem;
+}
+
+.topbar {
+    display: grid;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1.25rem;
+}
+
+.eyebrow {
+    margin: 0;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+h1 {
+    margin: 0.35rem 0 0;
+    font-size: clamp(1.8rem, 3.2vw, 2.7rem);
+}
+
+.create-form {
+    display: grid;
+    gap: 0.6rem;
+    grid-template-columns: 1fr;
+}
+
+.create-form input,
+.controls input,
+.create-form button,
+.controls button {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0.72rem 0.85rem;
+    font-family: inherit;
+    font-size: 0.95rem;
+}
+
+.create-form button,
+.controls button {
+    border: none;
+    background: linear-gradient(110deg, var(--accent), #14b8a6);
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.controls label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.88rem;
+}
+
+.feedback {
+    margin: 0;
+    min-height: 1.2rem;
+    font-size: 0.85rem;
+    color: var(--accent);
+}
+
+.feedback.error {
+    color: #b91c1c;
+}
+
+.board {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.lane {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: color-mix(in oklab, var(--surface) 92%, #ffffff 8%);
+    padding: 0.9rem;
+    box-shadow: 0 12px 30px rgba(16, 24, 32, 0.08);
+}
+
+.lane header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.7rem;
+}
+
+.lane h2 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.counter {
+    min-width: 1.8rem;
+    text-align: center;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.8rem;
+    padding: 0.22rem 0.45rem;
+    border-radius: 999px;
+    background: #e8ecea;
+}
+
+.lane-body {
+    min-height: 11rem;
+    display: grid;
+    gap: 0.65rem;
+    align-content: start;
+    border-radius: 10px;
+    padding: 0.35rem;
+    transition: background-color 0.2s ease;
+}
+
+.lane-body.drag-target {
+    background: rgba(15, 118, 110, 0.1);
+}
+
+.note {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #fff;
+    padding: 0.75rem;
     cursor: grab;
-    background-color: #f8f9fa;
-    border: 1px solid #ccc;
+    animation: rise 220ms ease both;
 }
 
-.task-card:hover {
-    background-color: #e2e6ea;
+.note.dragging {
+    opacity: 0.55;
 }
 
-.card-body {
-    min-height: 200px;
+.note .title {
+    margin: 0;
+    font-size: 0.98rem;
+}
+
+.note .content {
+    margin: 0.42rem 0 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.meta {
+    display: flex;
+    gap: 0.45rem;
+    justify-content: flex-end;
+    margin-top: 0.7rem;
+}
+
+.edit-btn {
+    border: none;
+    padding: 0.35rem 0.6rem;
+    border-radius: 8px;
+    background: #dcfce7;
+    color: #047857;
+    font-size: 0.75rem;
+    font-family: "IBM Plex Mono", monospace;
+    cursor: pointer;
+}
+
+.delete-btn {
+    border: none;
+    padding: 0.35rem 0.6rem;
+    border-radius: 8px;
+    background: #fee2e2;
+    color: #b91c1c;
+    font-size: 0.75rem;
+    font-family: "IBM Plex Mono", monospace;
+    cursor: pointer;
+}
+
+.disabled {
+    opacity: 0.45;
+    pointer-events: none;
+}
+
+@keyframes rise {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (min-width: 760px) {
+    .auth-form {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .auth-actions {
+        grid-column: 1 / -1;
+    }
+
+    .topbar {
+        grid-template-columns: 1.1fr 1fr;
+    }
+
+    .create-form {
+        grid-template-columns: 1fr 1fr auto;
+    }
+
+    .board {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
 }

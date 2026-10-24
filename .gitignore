@@ -1,0 +1,4 @@
+daily_notes.db
+*.exe
+*.out
+/vendor/
